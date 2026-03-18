@@ -5,6 +5,7 @@ WORKDIR /app
 ENV NODE_ENV=production
 ENV HOST=0.0.0.0
 ENV PORT=3000
+ENV npm_config_build_from_source=true
 
 RUN apt-get update \
   && apt-get install -y --no-install-recommends python3 make g++ \
@@ -12,7 +13,9 @@ RUN apt-get update \
 
 COPY package.json package-lock.json ./
 
-RUN npm ci --omit=dev
+RUN npm ci --omit=dev \
+  && rm -rf node_modules/better-sqlite3/build \
+  && npm rebuild better-sqlite3 --build-from-source
 
 COPY . .
 
