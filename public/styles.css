@@ -416,6 +416,11 @@ body{
   flex-wrap:wrap;
   margin: 6px 0;
 }
+.drawer.hidden,
+.modal.hidden,
+.backdrop.hidden{
+  display:none;
+}
 .variantChip{
   border:1px solid var(--border);
   background: var(--surface);
